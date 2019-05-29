@@ -39,6 +39,7 @@ export default {
 .do-layout {
   width: 100%;
   height: 100%;
+  overflow: hidden;
   aside {
     display: inline-block;
     width:160px;
@@ -54,7 +55,6 @@ export default {
     width:calc(100% - 160px);
     height: calc(100% - 60px);
     float: right;
-    background: #ccc;
   }
   
 }

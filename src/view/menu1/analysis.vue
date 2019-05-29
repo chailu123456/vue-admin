@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>analyas</h1>
+    <h1>analyassss</h1>
     <Btn @handleClick="login" class="login_btn" :widthStyle="widthStyle" text="点击"></Btn>
   </div>
 </template>

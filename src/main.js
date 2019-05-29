@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import Btn from '@/components/Button'
 import store from '@/store'
+import global from './utils/global'
+window.global = global
 Vue.config.productionTip = false
 
 Vue.use(Btn)

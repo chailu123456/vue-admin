@@ -31,10 +31,10 @@ const store = new Vuex.Store({
       console.log(parmas)
       let data = await Login.login(parmas)
       console.log(data)
-      if (data.token) {
+      if (data) {
         console.log(data.menu)
-        localStorage.setItem('token', token)
-        localStorage.setItem('menuLists', JSON.stringify(data.data.menu))
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('menuLists', JSON.stringify(data))
       }
     }
   }

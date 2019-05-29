@@ -7,8 +7,11 @@ class User extends base {
 
   login (data) {
     console.log(data)
-    return this.instance.post('/login', data)
+    return this.instance.post('/ccc', data)
   }
 
+  upload (data) {
+    return this.instance.post('/upload', data)
+  }
 }
 export default new User()
