@@ -28,8 +28,13 @@ export default {
   data() {
     return {
       name: '府谷市民小柴',
-      logourl: logoUrl,
-      usershow: false
+      logourl: localStorage.logourl,
+      usershow: false,
+      menuLists:[
+        {id:1,name:'组件',alias: 'compnent'},
+        {id:1,name:'个人中心',alias: 'personCenter'},
+        {id:1,name:'其他',alias: 'other'},
+      ]
     }
   },
   created() {
@@ -37,10 +42,7 @@ export default {
   },
   methods:{
     selectItem (val) {
-      this['SET_CURRENTSENCE'](val.alias)
-      this['SET_SUBMENULISTS'](JSON.stringify(val.next)) // 等同于this.$store.commit('increment', val.next)
-      localStorage.setItem('subMenuLists', JSON.stringify(val.next))
-      localStorage.setItem('currentsence', JSON.stringify(val.alias))
+
     },
     upLogo () {
       this.$refs.input.click()
@@ -57,11 +59,9 @@ export default {
       }
     },
     async upImg (parmas) {
-      console.log(parmas)
       let a = {
         base: parmas.target.result
       }
-      console.log(a)
       try {
         let data = await Login.upload(a)
         console.log(data)
@@ -71,6 +71,7 @@ export default {
       }
     },
     exitLogin () {
+      localStorage.clear()
       this.$router.push({
         path: '/'
       })
@@ -78,25 +79,13 @@ export default {
     handleBodyClick () {
       this.usershow = false
     },
-    ...mapMutations([
-        'SET_SUBMENULISTS',
-        'SET_CURRENTSENCE'
-      ]),
+
   },
   mounted () {
     document.addEventListener('click',this.handleBodyClick)
   },
   destroyed () {
     document.removeEventListener('click', this.handleBodyClick)
-  },
-  computed:{
-    ...mapState({
-      menuLists: state=>JSON.parse(state.menuLists)
-    }),
-    ...mapGetters([
-      'SET_MENULISTS'
-    ])
-    
   }
 }
 </script>

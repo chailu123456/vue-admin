@@ -28,14 +28,22 @@ const store = new Vuex.Store({
   },
   actions: {
     async Login({commit}, parmas) {
-      console.log(parmas)
-      let data = await Login.login(parmas)
-      console.log(data)
-      if (data) {
-        console.log(data.menu)
-        localStorage.setItem('token', data.token)
-        localStorage.setItem('menuLists', JSON.stringify(data))
+      let res = await Login.login(parmas)
+      if (res) {
+        // alert('登陆成功')
+        localStorage.setItem('logourl', res[0].logourl)
+        return res
+      } else {
+        alert('账号或密码错误')
       }
+      
+    },
+    async Register({commit}, parmas) {
+      let data = await Login.register(parmas)
+      if (data) {
+        alert('注册成功')
+        localStorage.setItem('logourl', data[0].logourl)}
+      return
     }
   }
 })

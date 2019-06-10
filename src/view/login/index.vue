@@ -8,7 +8,7 @@
         <form>
           <h1>注册</h1>
           <span>第三方账号注册</span>
-          <input type="email" v-model="from.uid" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="账号" />
+          <input type="value" v-model="from.uid" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="账号" />
           <input type="password" v-model="from.password" onkeyup="value=value.replace(/[\u4e00-\u9fa5]/ig,'')"  placeholder="密码" />
           <button @click="register">注册</button>
         </form>
@@ -17,7 +17,7 @@
         <form>
           <h1>登录</h1>
           <span>第三方账号登录</span>
-          <input type="email" v-model="from.uid" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="账号" />
+          <input type="value" v-model="from.uid" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="账号" />
           <input type="password" v-model="from.password" onkeyup="value=value.replace(/[\u4e00-\u9fa5]/ig,'')"  placeholder="密码" />
           <a href="#">忘记密码？</a>
           <button @click="login">登录</button>
@@ -56,7 +56,7 @@ export default {
       from:{
         password: "",
         uid: "",
-        url: ''
+        url: 'http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg'
       },
       isactive: false,
       isActive:true
@@ -73,27 +73,27 @@ export default {
       this.isactive = true
     },
     register () {
-
+			let data = this.from
+      if (data.uid && data.password) {
+        this.$store.dispatch('Register', data).then(v => {
+          if (v) {
+						alert('注册成功')
+						this.$router.push('/compnent')
+					} 
+        })
+      } else {
+				alert('账号或密码不能为空')
+      }
     },
     login() {
+			this.$router.push('/compnent')
       let data = this.from
       if (data.uid && data.password) {
         this.$store.dispatch('Login', data).then(v => {
-          this.$router.push('/analysis')
+					if (v) this.$router.push('/compnent')
         })
       } else {
         alert('账号或密码不能为空')
-      }
-      // this.$router.push('/home')
-    },
-    async logins (parmas) {
-      // console.log(parmas)
-      try {
-        let data = await Login.login(parmas)
-        console.log(data)
-        this.$router.push('/home')
-      }catch(err) {
-
       }
     }
   },

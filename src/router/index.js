@@ -12,62 +12,81 @@ export default new Router({
       component: ()=> import('@/view/login/index')
     },
     {
-      path: '/',
-      name: 'home',
+      path: '/compnent',
+      name: 'compnent',
       component:()=>import('@/view/layout/index'),
-      redirect: '/analysis',
       meta: {title: '首页'},
+      redirect: 'compnent/button',
       children:[
         {
-          path: 'analysis',
-          name:'menu1',
-          component:()=>import('@/view/menu1/send'),
-          redirect: '/analysis/user_overview',
-          children:[
-            {
-              path: 'user_overview',
-              name: 'user_overview',
-              component:()=>import('@/view/menu1/analysis')
-            },
-            {
-              path: 'scene_overview',
-              name: 'scene_overview',
-              component:()=>import('@/view/menu1/sceneOverview')
-            }
-          ]
+          path: 'button',
+          name:'buttonCompent',
+          meta: {title: '组件'},
+          component:()=>import('@/view/Button/buttonCompent')
         },
         {
-          path: 'geek',
-          name:'menu2',
-          component:()=>import('@/view/menu2/send'),
-          redirect: '/geek/batch_process',
-          children:[
-            {
-              path: 'batch_process',
-              name: 'batch_process',
-              component:()=>import('@/view/menu2/analysis')
-            }
-          ]
+          path: 'radio',
+          name:'Radio',
+          meta: {title: '组件'},
+          component:()=>import('@/view/Radio/index')
         },
         {
-          path: 'office-site',
-          name:'menu3',
-          component:()=>import('@/view/menu3/send'),
-          redirect: '/office-site/websiteArticle',
-          children:[
-            {
-              path: 'websiteArticle',
-              name: 'websiteArticle',
-              component:()=>import('@/view/menu3/analysis')
-            }
-          ]
+          path:'table',
+          name: 'Table',
+          meta: {title: '组件'},
+          component:()=>import('@/view/Table/index')
+        },
+        {
+          path: 'pagination',
+          name:'Pagination',
+          meta: {title: '组件'},
+          component:()=>import('@/view/Pagination/index')
+        },
+        {
+          path: 'loading',
+          name:'loading',
+          meta: {title: '组件'},
+          component:()=>import('@/view/Loading/index')
+        },
+        {
+          path: 'cascader',
+          name:'cascader',
+          meta: {title: '组件'},
+          component:()=>import('@/view/Cascader/index')
+        },
+        {
+          path: 'tabs',
+          name:'tabs',
+          meta: {title: '组件'},
+          component:()=>import('@/view/Tabs/index')
         }
       ]
     },
     {
-      path: '/HelloWorld',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/personCenter',
+      name: 'personCenter',
+      component: ()=>import('@/view/layout/index'),
+      redirect: 'personCenter/person',
+      children: [
+        {
+          path: 'person',
+          name: 'person',
+          component: ()=>import('@/view/persons/index')
+        }
+      ]
+    },
+    {
+      path: '/other',
+      name: 'other',
+      component:()=>import('@/view/layout/index'),
+      redirect: 'other',
+      children: [
+        {
+          path: '',
+          name: 'other',
+          component:()=>import('@/view/other/index')
+        }
+      ]
     }
   ]
 })

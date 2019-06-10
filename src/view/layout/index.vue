@@ -3,11 +3,12 @@
     <header class="do-layout-header">
       <navTab></navTab>
     </header>
-    <aside class="layout-aside">
-      <asidemenu></asidemenu>
-    </aside>
+
     <content class="layout-content">
-      <router-view></router-view>
+      <aside class="layout-aside" v-if="asidemenu">
+        <asidemenu></asidemenu>
+      </aside>
+      <app-main :class="{contentShow: isactive, contents: noaside}"></app-main>
     </content>
   </div>
 </template>
@@ -15,11 +16,14 @@
 <script>
 import navTab from './components/nav'
 import asidemenu from './components/asidemenu'
+import appMain from './components/appMain'
 export default {
   name: 'login',
   data () {
     return {
-      
+      isactive: true,
+      asidemenu: true,
+      noaside: false
     }
   },
   created () {
@@ -30,7 +34,21 @@ export default {
   },
   components:{
     navTab,
-    asidemenu
+    asidemenu,
+    appMain
+  },
+  watch: {
+    '$route'(v){
+      if (v.meta && v.meta.title != '组件') {
+        console.log(v)
+        this.asidemenu = false
+        this.noaside = true
+      } else {
+        this.noaside = false
+        this.asidemenu = true
+      }
+      
+    }
   }
 }
 </script>
@@ -44,17 +62,26 @@ export default {
     display: inline-block;
     width:160px;
     height: calc(100% - 60px);
-    background: #32323d;
+    background: #343957;
   }
   .do-layout-header {
     height: 60px;
     background: #2a5788;
   }
   .layout-content {
-    display: inline-block;
-    width:calc(100% - 160px);
-    height: calc(100% - 60px);
     float: right;
+    width: 100%;
+    height: 100%;
+    
+  }
+  .contentShow {
+    width: calc(100% - 160px);
+    float: right;
+    height: 100%;
+    overflow: hidden;
+  }
+  .contents {
+    width: 100%;
   }
   
 }
