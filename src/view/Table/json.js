@@ -6,9 +6,19 @@ const Json = {
           title: '序号',
           width: '10%',
           tip: true,
+          align: 'center',
           key: 'index',
           rule (v) {
             return v.index
+          }
+        },
+        {
+          title: 'ID',
+          width: '10%',
+          tip: true,
+          key: 'id',
+          rule (v) {
+            return v.id
           }
         },
         {
@@ -47,7 +57,7 @@ const Json = {
         },
         {
           title: '邮编',
-          width: '20%',
+          width: '10%',
           key: 'email',
           rule (v) {
             return v.email
@@ -67,11 +77,11 @@ const Json = {
               }
             },
             {
-              name: '新增',
+              name: '删除',
               width: '50%',
-              color: '#1977dc',
+              color: '#f56c6c',
               action:function(v) {
-                that.addData(v)
+                that.remove(v)
               }
             }
           ]

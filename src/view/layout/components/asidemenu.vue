@@ -2,7 +2,7 @@
 <template>
   <div class="do-aside">
     <ul>
-      <router-link tag="li" v-for="(item, index) in subMenuLists" :key="index" @click.native="selectItem(item, 'parent')" :to='`/${currentsence}/${item.alias}`'>
+      <router-link tag="li" v-for="(item, index) in subMenuLists" active-class="active" :key="index" @click.native="selectItem(item, 'parent')" :to='`/${currentsence}/${item.alias}`'>
         <span>{{item.name}}</span>
       </router-link>
     </ul>
@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       subMenuLists: [
-        {id:1,name:'Button 按钮',alias: 'button'},
+        {id:1,name:'Button按钮 Input输入框',alias: 'button'},
         {id:2,name:'Radio & Checkbox',alias: 'radio'},
         {id:3,name:'Table表格',alias: 'table'},
         {id:4,name:'Pagination 分页',alias: 'pagination'},
@@ -57,6 +57,9 @@ export default {
       span {
         padding-left: 10px;
       }
+    }
+    .active {
+      background: #506f8e;
     }
   }
 }

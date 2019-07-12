@@ -40,7 +40,6 @@ export default {
   watch: {
     '$route'(v){
       if (v.meta && v.meta.title != '组件') {
-        console.log(v)
         this.asidemenu = false
         this.noaside = true
       } else {

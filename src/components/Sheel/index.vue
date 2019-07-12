@@ -1,7 +1,8 @@
 <template>
   <div class="do-ui-table">
+    
     <ul class="table-thead">
-      <li class="table-thead-bg" v-for="(item,index) in tableData.columns" :style="{width:item.width}" :key="index">
+      <li class="table-thead-bg" v-for="(item,index) in tableData.columns" :style="{width:item.width,textAlign:textAlign}" :key="index">
         <section>{{item.title}}</section>
         <div class="all-select" @click="allselect" v-if="item.title==='操作' && !checkdata">
           <input type="checkbox" v-model="checkAll">
@@ -9,18 +10,19 @@
       </li>
     </ul>
     <ul class="table-body" v-if="tableData.tbodydata.length>0" >
-      <li class="table-body-content" :class="{'table-tr-odd': columnIndex%2 != 0}"  v-for="(val, columnIndex) in tableData.tbodydata" :key="columnIndex">
+      <li class="table-body-content" :class="{'table-tr-odd': columnIndex%2 != 0}" :style="{textAlign:textAlign}" v-for="(val, columnIndex) in tableData.tbodydata" :key="columnIndex">
         <section v-for="(column, index) in tableData.columns" :title="column.tip ? title(val, column, index): ''" :style="{width:column.width}" :key="index">
           <span v-if="column.render">
             <em v-for="(item, indexOper) in column.render" v-if="checkdata" :style="{color:item.color}"  @click="operation(val, item)" :key="indexOper" v-html="valSetting(item, indexOper)"></em>
-            <input type="checkbox" v-model="checkModel" v-if="!checkdata" :value="val">
+            <input type="checkbox" v-model="checkModel"  v-if="!checkdata" :value="val">
+
           </span>
           <span v-else v-html="valSetting(val, column, columnIndex)"></span>
         </section>
       </li>
     </ul>
     <ul class="table-body" v-else>
-      <li style="text-align:center;">暂无数据</li>
+      <li style="height:34px;line-height:34px;text-align:center;">暂无数据</li>
     </ul>
   </div>
 </template>
@@ -70,7 +72,7 @@ export default {
                     name: '编辑',
                     width: '50%',
                     action:function(v) {
-                      console.log
+                      console.log(v)
                     }
                   },
                   {
@@ -96,6 +98,12 @@ export default {
         }
       }
     },
+    textAlign: {
+      type: String,
+      default() {
+        return 'center'
+      }
+    },
     checkdata: {
       type: Boolean,
       default() {
@@ -111,6 +119,12 @@ export default {
   },
   data() {
     return {
+      selectIcon:{
+        noRadio: require('@/assets/icon_u.png'),
+        yesRadio: require('@/assets/icon_s.png'),
+        noSelect: require('@/assets/noselect.png'),
+        yesSelect: require('@/assets/select.png')
+      },
       checkAll: false,
       checkModel: []
     }
@@ -136,7 +150,11 @@ export default {
     operation(v, item) { 
       this.opation.setting(v, item)
     },
+    select (val) {
+      console.log(val)
+    },
     allselect () {
+      this.checkModel = []
       this.checkAll = !this.checkAll
       if (this.checkAll) {
         this.tableData.tbodydata.forEach(val => {
@@ -159,6 +177,12 @@ export default {
         this.opation.checkClick(this.checkModel)
       },
       deep: true
+    },
+    checkdata:{
+      handler() {
+        if (this.checkdata) this.checkModel = []
+      },
+      deep: true
     }
   }
 }
@@ -178,6 +202,12 @@ export default {
       }
       .all-select {
         display: inline;
+        position: relative;
+        input {
+          position: absolute;
+          top: 0px;
+          left:8px;
+        }
       }
     }
   }
@@ -188,8 +218,15 @@ export default {
       section{
         display: inline-block;
         span {
+          position: relative;
           em {
             margin: 0 4px;
+            &:hover {cursor: pointer;}
+          }
+          input {
+            position: absolute;
+            top: -10px;
+            left:20px;
           }
         }
       }

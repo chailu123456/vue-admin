@@ -7,7 +7,7 @@
       </router-link>
       <div class="person">
         <span @click.stop="operationUser">
-          <img :src="logourl"  alt="">
+          <img :src="this.logourl"  alt="">
           <input ref="input" type="file" hidden @change="toBase64($event)">
         </span>
         <p>{{name}}</p>
@@ -22,13 +22,13 @@
 
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import logoUrl from '@/assets/ww.jpg'
+import logoUrls from '@/assets/ww.jpg'
 import Login from '@/api/login'
 export default {
   data() {
     return {
       name: '府谷市民小柴',
-      logourl: localStorage.logourl,
+      logoimg: '',
       usershow: false,
       menuLists:[
         {id:1,name:'组件',alias: 'compnent'},
@@ -38,7 +38,7 @@ export default {
     }
   },
   created() {
-    
+
   },
   methods:{
     selectItem (val) {
@@ -64,22 +64,23 @@ export default {
       }
       try {
         let data = await Login.upload(a)
-        console.log(data)
-        this.logourl = 'http://localhost:3000/'+ data.url
-      }catch(err) {
+        this.logoimg = 'http://localhost:3000/'+ data.url
+      } catch(err) {
 
       }
     },
     exitLogin () {
       localStorage.clear()
-      this.$router.push({
-        path: '/'
-      })
+      location.reload()
     },
     handleBodyClick () {
       this.usershow = false
-    },
-
+    }
+  },
+  computed: {
+    ...mapState({
+      logourl: state => state.logourl
+    })
   },
   mounted () {
     document.addEventListener('click',this.handleBodyClick)

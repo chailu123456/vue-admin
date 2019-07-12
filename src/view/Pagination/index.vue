@@ -1,23 +1,26 @@
 <template>
   <div>
-    分页
-    <button @click="load">加载</button>
+    <Page :totalPages="allpages" :jump="true" @page="currentpages"></Page>
   </div>
 </template>
+
 <script>
 export default {
-  data() {
+  name: 'page',
+  data () {
     return {
-      
+      allpages: 12,
     }
   },
-  methods: {
-    load() {
-      this.$loading.show()
+  methods:{
+    currentpages(page) {
+      console.log(page)
     }
   }
+
 }
 </script>
-<style lang="sass"> 
+
+<style lang="scss">
 
 </style>

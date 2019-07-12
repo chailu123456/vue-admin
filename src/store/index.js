@@ -2,48 +2,43 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 import Login from '@/api/login'
-let userInfo = localStorage.getItem('userInfo')
+let logourl = localStorage.getItem('logourl')
 let token = localStorage.getItem('token')
-let menuLists = localStorage.getItem('menuLists')
-let subMenuLists = localStorage.getItem('subMenuLists')
-let currentsence = localStorage.getItem('currentsence')
 
 const store = new Vuex.Store({
   state: {
-    a: 1,
-    menuLists: menuLists, 
-    userInfo: userInfo,
-    token: token,
-    subMenuLists: subMenuLists,
-    currentsence: currentsence
+    logourl: logourl,
+    token: token
   },
   getters: {
-    menuLists: state => state.menuLists
+    token: state=>state.token,
+    logourl: state=>state.logourl,
   },
   mutations: {
     SET_TOKEN: (state, params) => state.token = params,
-    SET_MENULISTS: (state, params) => state.menuLists = params,
-    SET_SUBMENULISTS: (state, params) => state.subMenuLists = params,
-    SET_CURRENTSENCE: (state, params) => state.currentsence = params
+    SET_LOGOURL: (state, params) => state.logourl = params
   },
   actions: {
     async Login({commit}, parmas) {
       let res = await Login.login(parmas)
       if (res) {
-        // alert('登陆成功')
+        commit('SET_TOKEN', res[0].token)
+        commit('SET_LOGOURL', res[0].logourl)
         localStorage.setItem('logourl', res[0].logourl)
+        localStorage.setItem('token', res[0].token)
         return res
       } else {
         alert('账号或密码错误')
       }
-      
     },
     async Register({commit}, parmas) {
       let data = await Login.register(parmas)
       if (data) {
-        alert('注册成功')
-        localStorage.setItem('logourl', data[0].logourl)}
-      return
+        commit('SET_TOKEN', data[0].token)
+        localStorage.setItem('logourl', data[0].logourl)
+        localStorage.setItem('token', data[0].token)
+      }
+      return data
     }
   }
 })

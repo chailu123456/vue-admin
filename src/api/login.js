@@ -6,7 +6,7 @@ class User extends base {
   }
 
   login (data) {
-    return this.instance.post('/login', data)
+    return this.instance.post('/user/login', data)
   }
 
   register (data) {
@@ -14,7 +14,11 @@ class User extends base {
   }
 
   upload (data) {
-    return this.instance.post('/upload', data)
+    return this.instance.post('/upload/logo', data)
+  }
+
+  imglist (data) {
+    return this.instance.get('/imgarr',{data})
   }
 }
 export default new User()

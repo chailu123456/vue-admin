@@ -1,6 +1,6 @@
 const global = {
   popur (){
-    alert('sss')
+    console.log(window)
   }
 }
 export default global

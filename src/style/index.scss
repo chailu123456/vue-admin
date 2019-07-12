@@ -22,3 +22,44 @@ html {height: 100%;}
 body {font-family:Helvetica, Arial,"WenQuanYi Micro Hei","PingFang SC","Hiragino Sans GB","Segoe UI", "Microsoft Yahei", sans-serif;-webkit-font-smoothing: antialiased;text-size-adjust: 100%;-webkit-tap-highlight-color: transparent;height: 100%;}
 code,pre,samp {font-family:Menlo,Monaco,Consolas,"Courier New",monospace;}
 em,i {font-style: normal;font-size: 12px;}
+
+input[type="checkbox"]{
+  appearance: none; 
+  -webkit-appearance: none;
+  outline: none;
+  display:none;
+  width:20px;
+  height:20px;
+}
+input[type="checkbox"]{
+  width:20px;
+  height:20px;
+  display:inline-block;
+  background:url('../assets/noselect.png')  no-repeat;
+  background-position:0 0;
+}
+input[type="checkbox"]:checked{
+  background:url('../assets/select.png')  no-repeat;
+}
+
+input[type="radio"]{
+  appearance: none; 
+  -webkit-appearance: none;
+  outline: none;
+  display:none;
+  width:20px;
+  height:20px;
+}
+input[type="radio"]{
+  width:20px;
+  height:20px;
+  display:inline-block;
+  background:url('../assets/icon_u.png')  no-repeat;
+  background-position:0 0;
+}
+input[type="radio"]:checked{
+  background:url('../assets/icon_s.png')  no-repeat;
+}
+
+::-webkit-scrollbar{width: 4px;height:4px;background: transparent;}
+::-webkit-scrollbar-thumb{border-radius:2px;background:rgba(156,169,222,1);}

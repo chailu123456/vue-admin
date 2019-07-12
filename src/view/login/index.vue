@@ -10,7 +10,7 @@
           <span>第三方账号注册</span>
           <input type="value" v-model="from.uid" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="账号" />
           <input type="password" v-model="from.password" onkeyup="value=value.replace(/[\u4e00-\u9fa5]/ig,'')"  placeholder="密码" />
-          <button @click="register">注册</button>
+          <button @click.prevent="register">注册</button>
         </form>
       </div>
       <div class="form-container sign-in-container">
@@ -20,7 +20,7 @@
           <input type="value" v-model="from.uid" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="账号" />
           <input type="password" v-model="from.password" onkeyup="value=value.replace(/[\u4e00-\u9fa5]/ig,'')"  placeholder="密码" />
           <a href="#">忘记密码？</a>
-          <button @click="login">登录</button>
+          <button @click.prevent="login">登录</button>
         </form>
       </div>
       <div class="overlay-container">
@@ -28,12 +28,12 @@
           <div class="overlay-panel overlay-left">
             <h1>欢迎回来！</h1>
             <p>请您先登录的个人信息，进行操作。</p>
-            <button class="ghost" @click="signIn">登录</button>
+            <button class="ghost" @click.prevent="signIn">登录</button>
           </div>
           <div class="overlay-panel overlay-right">
             <h1>你好朋友！</h1>
             <p>输入您的个人信息注册成为会员。</p>
-            <button class="ghost" @click="signUp">注册</button>
+            <button class="ghost" @click.prevent="signUp">注册</button>
           </div>
         </div>
       </div>
@@ -77,23 +77,31 @@ export default {
       if (data.uid && data.password) {
         this.$store.dispatch('Register', data).then(v => {
           if (v) {
-						alert('注册成功')
+						this.Toast({
+							msg:'注册成功',  // message显示信息
+							state:'success' // 状态 success：成功  err：错误  tips：提示  warn：警告
+						})
 						this.$router.push('/compnent')
 					} 
         })
       } else {
-				alert('账号或密码不能为空')
+				this.Toast({
+					msg:'账号或密码不能为空',  // message显示信息
+					state:'tips' // 状态 success：成功  err：错误  tips：提示  warn：警告
+				})
       }
     },
     login() {
-			this.$router.push('/compnent')
       let data = this.from
       if (data.uid && data.password) {
         this.$store.dispatch('Login', data).then(v => {
 					if (v) this.$router.push('/compnent')
         })
       } else {
-        alert('账号或密码不能为空')
+        this.Toast({
+					msg:'账号或密码不能为空',  // message显示信息
+					state:'tips' // 状态 success：成功  err：错误  tips：提示  warn：警告
+				})
       }
     }
   },

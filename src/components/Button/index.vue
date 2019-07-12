@@ -1,6 +1,6 @@
 <template>
   <div class="do-ui-button">
-    <button class="button" :style="widthStyle" @click="handleClick">{{text}}</button>
+    <button :style="widthStyle" @click="handleClick">{{text}}</button>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
     text:{
       type: String,
       default () {
-        return '确认'
+        return '默认按钮'
       }
     },
     widthStyle: {
@@ -38,16 +38,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .do-ui-button {
-  .button {
+  display: inline-block;
+  button {
     min-width: 90px;
     height:34px;
     line-height:34px;
     color: #fff;
     background:rgba(115,138,224,1);
-    border-radius:2px;
+    border-radius:4px;
+    font-size: 12px;
     border: none;
     &:hover {
       background:#5f78d5;
+      cursor: pointer;
     }
   }
 }

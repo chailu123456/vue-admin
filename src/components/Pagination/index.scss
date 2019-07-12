@@ -1,0 +1,80 @@
+.do-ui-paging {
+  -webkit-user-select:none;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  &:hover{
+    cursor: pointer;
+  }
+  .ellipsis {
+    font-size: 12px;
+    font-weight: 600;
+    i {
+      color: #636d77;
+      font-weight: 400;
+      &:hover::before {
+        content:'>'
+      }
+    }
+    i.iconleft {
+      &:hover::before {
+        content:'<'
+      }
+    }
+  }
+  em {
+    width: 28px;
+    line-height: 28px;
+    display: inline-block;
+    margin:0 10px;
+    font-weight: 700;
+    border: 1px solid #dcdee2;
+    border-radius: 4px;
+    i {
+      color: #636d77;
+    }
+  }
+  em.forbid{
+    cursor: not-allowed;
+    i {
+      color: #dcdee2;
+    }
+  }
+  .page-content {
+    display: inline-block;
+  }
+  span {
+    display: inline-block;
+    margin: 0 6px;
+    border: 1px solid #dcdee2;
+    width: 28px;
+    line-height: 28px;
+    border-radius: 4px;
+    font-size: 12px;
+    &:hover {
+      cursor: pointer;
+      color: #409eff;
+    }
+  }
+  span.active {
+    color: #409eff;
+    border-color: #2d8cf0;
+  }
+  .go-page {
+    display: inline-block;
+    input {
+      padding: 0 3px;
+      width:50px;
+      height: 26px;
+      line-height: 26px;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #dcdfe6;
+      
+      &:hover {
+        border: 1px solid #409eff;
+        transition: border-color .5s;
+      }
+    }
+  }
+}

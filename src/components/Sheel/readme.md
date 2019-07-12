@@ -65,6 +65,12 @@ tableData:{
             return true  // 是否批量操作
           }
         },
+        textAlign: {
+          type: String,  // 文字对齐方式
+          default() {
+            return 'center'
+          }
+        },
         opation:{  // 组件接受的值
           type: Object,
           default() {

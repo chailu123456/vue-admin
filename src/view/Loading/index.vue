@@ -46,6 +46,9 @@ export default {
         },
         yes (a) {
           console.log(a)
+        },
+        no(d) {
+          console.log(d)
         }
       })
     }

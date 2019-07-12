@@ -28,6 +28,12 @@ export default {
         return '此操作将永久删除该文件, 是否继续?'
       }
     },
+    data: {
+      type: Object,
+      default () {
+        return null
+      }
+    },
     title: {
       type: String,
       default () {
@@ -43,10 +49,8 @@ export default {
   },
   methods:{
     yes () {
-      this.callback['yes']('ssds')
+      this.callback['yes'](this.data)
       this.showLoading = false
-      // this.$loading.hide()
-      
     },
     no () {
       this.$loading.hide()

@@ -1,18 +1,19 @@
 <template>
   <div class="do-ui-popup" v-if="show">
-    <div class="popup-opation">
+    <div class="popup-opation" :style="{width:width,height:height}">
       <div class="tip">{{title}}</div>
       <div class="d">
           <component
           :data="data"
           :is="component.name"
           v-if="component"
-          v-on:child-say="yes"
+          v-on:childSay="yes"
+          v-on:childBye="no"
           >
         </component>
       </div>
         
-      <div class="btn-opation">
+      <div class="btn-opation" v-if="false">
         <span class="popup-btn" @click="no">取消</span>
         <span class="popup-btn popup-btn-confirm" @click="yes">确定</span>
       </div>
@@ -40,23 +41,18 @@ export default {
       width: '',
       height: '',
       component: null,
-      data: null,
-      form:{
-        a:2,
-        s:3,
-        v:4
-      }
+      data: null
     }
   },
   methods:{
     yes (data) {
-      console.log(data)
       // this.callback['yes'](this.form)
-      // this.callback['yes'] && this.callback['yes'](this.data)
+      this.callback['yes'] && this.callback['yes'](data)
       this.show = false
       this.$el.remove(this.$el) //删除当前节点
     },
-    no () {
+    no (data) {
+      this.callback['no'] && this.callback['no'](data)
       this.$el.remove(this.$el) //删除当前节点
       this.show = false
     }

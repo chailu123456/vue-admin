@@ -3,20 +3,22 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Btn from '@/components/Button'
-import Load from '@/components/Loading'
-import Popup from '@/components/Popup'
-import Sheel from '@/components/Sheel'
+
+
+import complist from './components.js'
+for(var a in complist){
+  Vue.use(complist[a])
+}
 import '@/style/index.scss'
+import '@/style/icon.scss'
 import store from '@/store'
 import global from './utils/global'
+
+import './router/routerInspect.js'
+
 window.global = global
 Vue.config.productionTip = false
 
-Vue.use(Btn)
-Vue.use(Load)
-Vue.use(Popup)
-Vue.use(Sheel)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
