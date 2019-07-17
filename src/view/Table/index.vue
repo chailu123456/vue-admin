@@ -65,8 +65,16 @@ export default {
   },
   created () {
     this.getdata(this.form)
+    this.a1()
   },
   methods: {
+
+    async a1() {
+      let v = await this.b()
+      console.log('----')
+      console.log(v)
+    },
+    b() {return '32sasdad'},
     setting(data, render) {
       render.action(data) // 调用action的方法
     },
@@ -74,7 +82,7 @@ export default {
       this.form = {
         page: 1,
         num: 4
-        }
+      }
       switch(item.id) {
         case 1:
           this.searchVal = 'id';
@@ -196,7 +204,8 @@ export default {
       try{
         let data = await geek.order(parmas)
         if (data) {
-          that.tableDatas[0].tbodydata = data
+          that.tableDatas[0].tbodydata = data.result
+          that.allpages =  Math.ceil(data.totalpage/4) // 向上取整
         } else {
           that.tableDatas[0].tbodydata = []
         }

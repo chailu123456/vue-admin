@@ -78,6 +78,7 @@ export default {
     float: right;
     height: 100%;
     overflow: hidden;
+    overflow: scroll;
   }
   .contents {
     width: 100%;

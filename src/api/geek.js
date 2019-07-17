@@ -27,5 +27,15 @@ class Geek extends base {
   editorder(data) {
     return this.instance.post('/order',data)
   }
+
+  // 获取富文本内容
+  writegettxt(data) {
+    return this.instance.get('/editorlist',{data})
+  }
+
+  // 发送富文本内容
+  writetxt(data) {
+    return this.instance.post('/editor',data)
+  }
 }
 export default new Geek()
